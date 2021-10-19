@@ -194,11 +194,12 @@ def handle_query(call):
         # todo: проверка отправки согласия в базе
         # if soglasie_ne_polusheno:
         if True:
-            text_message = 'Согласие на использование. Не согласны - не используйте.\n' \
+            concept_message = 'Согласие на использование. Не согласны - не используйте.\n' \
                            'Счастья, здоровья и вообще всего доброго.'
-            bot.send_message(call.from_user.id, text_message)
+            bot.send_message(call.from_user.id, concept_message)
 
-        pass
+        after_query_message = 'Для вызова помощи используйте команду /help.'
+        bot.send_message(call.from_user.id, after_query_message)
 
     elif 'account_info' in call.data:
         param = call.data.split(':')[1]
