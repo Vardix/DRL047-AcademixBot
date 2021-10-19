@@ -87,7 +87,11 @@ def commands(message):
         for command in COMMANDS.keys():
             help_message += '/' + command + ' - ' + COMMANDS[command] + '\n'
 
-        bot.reply_to(message, help_message)
+        # bot.reply_to(message, help_message)
+        bot.send_message(
+            chat_id=message.chat.id,
+            text=help_message,
+        )
 
     elif message.text == '/settings':
         # todo: запросы к базе для получения данных
@@ -123,7 +127,11 @@ def commands(message):
         # todo: как оно вообще должно работать?
         support_message = 'Доступ к модулю находиться в разработке.\n' \
                           'Зайдите позже.'
-        bot.reply_to(message, support_message)
+        # bot.reply_to(message, support_message)
+        bot.send_message(
+            chat_id=message.chat.id,
+            text=support_message,
+        )
 
     elif message.text == '/assistant':
         # todo: проверка регистрации пользователя
@@ -135,7 +143,11 @@ def commands(message):
         )
         if random.randint(0, 1):
             assistant_pls_register = 'Вы не авторизованы, пожалуйста авторизуйтесь.'
-            bot.reply_to(message, assistant_pls_register)
+            # bot.reply_to(message, assistant_pls_register)
+            bot.send_message(
+                chat_id=message.chat.id,
+                text=assistant_pls_register,
+            )
             link_to_another_service = 'Ссылка для авторизаци:\n' \
                                       'any_think.com'
             bot.send_message(
@@ -144,7 +156,11 @@ def commands(message):
             )
         else:
             assistant_message = 'Вы авторизованы, но модуль еще в разработке.'
-            bot.reply_to(message, assistant_message)
+            # bot.reply_to(message, assistant_message)
+            bot.send_message(
+                chat_id=message.chat.id,
+                text=assistant_message,
+            )
         pass
 
     else:
@@ -321,6 +337,15 @@ def handler_query(call):
                 reply_markup='',
             )
         pass
+
+    # elif 'med_paper' in call.data:
+    #     med_paper = 'Вы открыли медицинскую карту, но она не открылась.'
+    #     bot.edit_message_text(
+    #         chat_id=call.message.chat.id,
+    #         text=med_paper,
+    #         message_id=call.message.message_id,
+    #         reply_markup='',
+    #     )
 
     # print(call)
     print('255', call.data)
