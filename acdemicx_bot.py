@@ -148,7 +148,7 @@ def commands(message):
                 chat_id=message.chat.id,
                 text=assistant_pls_register,
             )
-            link_to_another_service = 'Ссылка для авторизаци:\n' \
+            link_to_another_service = '!Ссылка для авторизаци:\n' \
                                       'any_think.com'
             bot.send_message(
                 chat_id=message.chat.id,
@@ -235,9 +235,10 @@ def handler_query(call):
         # TODO: сохранить языковую настройку сюда
         print(182, lang)
         # print(lang)
+        confirmed_lang_message = "Вы выбрали {0} язык.".format(ENABLED_LANG[lang])
         bot.edit_message_text(
             chat_id=call.message.chat.id,
-            text="Вы выбрали {0} язык.".format(ENABLED_LANG[lang]),
+            text=confirmed_lang_message,
             message_id=call.message.message_id,
             reply_markup='',
         )
