@@ -58,6 +58,7 @@ logging.basicConfig(
 )
 
 bot = telebot.TeleBot(CONFIG.TOKEN)
+logging.info('Bot started.')
 
 
 @bot.message_handler(commands=COMMANDS.keys())
