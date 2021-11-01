@@ -6,8 +6,14 @@ import random
 import telebot
 from telebot import types
 
-import CONFIG
+import config
+import tools
 
+ENABLED_LANG_NAMES = tools.get_locale_names(path_to_locales=config.PATH_TO_LOCALES)
+ENABLED_DATA_LANG = tools.get_all_locales_data(
+    path_to_locale=config.PATH_TO_LOCALES,
+    locale_names=ENABLED_LANG_NAMES
+)
 ENABLED_LANG = {
     'RU0': 'русский 0', 'RU1': 'русский 1', 'RU2': 'русский 2',
     # 'RU3', 'RU4', 'RU5',
@@ -18,7 +24,7 @@ ENABLED_LANG = {
 COUNTRIES = {
     'RU': 'Россия',
     'UA': 'Украiна',
-    'USA': 'USA'
+    'USA': 'USA',
 }
 
 ACCOUNT_INFO = {
@@ -52,12 +58,12 @@ COMMANDS = {
 
 
 logging.basicConfig(
-    level=CONFIG.LOGGER_LEVEL,
+    level=config.LOGGER_LEVEL,
     format="%(asctime)s [%(threadName)s] [%(funcName)s] [%(levelname)s]  %(message)s",
-    filename=CONFIG.PATH_TO_LOG
+    filename=config.PATH_TO_LOG
 )
 
-bot = telebot.TeleBot(CONFIG.TOKEN)
+bot = telebot.TeleBot(config.TOKEN)
 logging.info('Bot started.')
 
 
@@ -190,7 +196,7 @@ def make_keyboard(kb_type, id_button=None):
     markup = types.InlineKeyboardMarkup()
     if isinstance(kb_type, str):
         for in_key in KEYBOARDS[kb_type].keys():
-            # print(KEYBORDS[kb_type][in_key])
+            print(KEYBOARDS[kb_type][in_key])
             # print("{0}:{1}".format(kb_type, in_key))
             markup.add(
                 types.InlineKeyboardButton(
